@@ -1,0 +1,268 @@
+<html>
+<head>
+<title>Program.cs</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #d0d0d0;}
+.s1 { color: #6c95eb;}
+.s2 { color: #bdbdbd;}
+.s3 { color: #c9a26d;}
+.s4 { color: #ed94c0;}
+</style>
+</head>
+<body bgcolor="#262626">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Program.cs</font>
+</center></td></tr></table>
+<pre>
+<span class="s1">using </span><span class="s0">System</span><span class="s2">;</span>
+
+<span class="s1">using </span><span class="s0">System</span><span class="s2">.</span><span class="s0">Collections</span><span class="s2">.</span><span class="s0">Generic</span><span class="s2">;</span>
+
+
+
+<span class="s1">namespace </span><span class="s0">FirstGame</span>
+
+<span class="s2">{</span>
+
+    <span class="s1">interface </span><span class="s0">IEngine</span>
+
+    <span class="s2">{</span>
+
+        <span class="s1">void </span><span class="s0">Start</span><span class="s2">();</span>
+
+        <span class="s1">void </span><span class="s0">Stop</span><span class="s2">();</span>
+
+        <span class="s1">void </span><span class="s0">Accelerate</span><span class="s2">();</span>
+
+    <span class="s2">}</span>
+
+
+
+    <span class="s1">class </span><span class="s0">PetrolEngine : IEngine</span>
+
+    <span class="s2">{</span>
+
+        <span class="s1">public void </span><span class="s0">Start</span><span class="s2">() </span><span class="s0">=&gt; Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Petrol engine roars to life.&quot;</span><span class="s2">);</span>
+
+        <span class="s1">public void </span><span class="s0">Stop</span><span class="s2">() </span><span class="s0">=&gt; Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Petrol engine shuts down.&quot;</span><span class="s2">);</span>
+
+        <span class="s1">public void </span><span class="s0">Accelerate</span><span class="s2">() </span><span class="s0">=&gt; Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Petrol engine is accelerating.&quot;</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+
+
+    <span class="s1">class </span><span class="s0">ElectricEngine : IEngine</span>
+
+    <span class="s2">{</span>
+
+        <span class="s1">public void </span><span class="s0">Start</span><span class="s2">() </span><span class="s0">=&gt; Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Electric engine starts silently.&quot;</span><span class="s2">);</span>
+
+        <span class="s1">public void </span><span class="s0">Stop</span><span class="s2">() </span><span class="s0">=&gt; Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Electric engine powers down.&quot;</span><span class="s2">);</span>
+
+        <span class="s1">public void </span><span class="s0">Accelerate</span><span class="s2">() </span><span class="s0">=&gt; Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Electric engine accelerates smoothly.&quot;</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+
+
+    <span class="s1">class </span><span class="s0">Wheel</span>
+
+    <span class="s2">{</span>
+
+        <span class="s1">public string </span><span class="s0">Position </span><span class="s2">{ </span><span class="s0">get</span><span class="s2">; </span><span class="s1">private </span><span class="s0">set</span><span class="s2">; }</span>
+
+
+
+        <span class="s1">public </span><span class="s0">Wheel</span><span class="s2">(</span><span class="s1">string </span><span class="s0">position</span><span class="s2">)</span>
+
+        <span class="s2">{</span>
+
+            <span class="s0">Position </span><span class="s2">= </span><span class="s0">position</span><span class="s2">;</span>
+
+        <span class="s2">}</span>
+
+
+
+        <span class="s1">public void </span><span class="s0">Spin</span><span class="s2">() </span><span class="s0">=&gt; Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;</span><span class="s2">{</span><span class="s0">Position</span><span class="s2">} </span><span class="s3">wheel is spinning.&quot;</span><span class="s2">);</span>
+
+    <span class="s2">}</span>
+
+
+
+    <span class="s1">class </span><span class="s0">Car</span>
+
+    <span class="s2">{</span>
+
+        <span class="s1">private readonly </span><span class="s0">IEngine _engine</span><span class="s2">;</span>
+
+        <span class="s1">private readonly </span><span class="s0">List</span><span class="s2">&lt;</span><span class="s0">Wheel</span><span class="s2">&gt; </span><span class="s0">_wheels</span><span class="s2">;</span>
+
+
+
+        <span class="s1">public string </span><span class="s0">Model </span><span class="s2">{ </span><span class="s0">get</span><span class="s2">; </span><span class="s1">private </span><span class="s0">set</span><span class="s2">; }</span>
+
+        <span class="s1">public string </span><span class="s0">Color </span><span class="s2">{ </span><span class="s0">get</span><span class="s2">; </span><span class="s1">private </span><span class="s0">set</span><span class="s2">; }</span>
+
+        <span class="s1">public int </span><span class="s0">FuelLevel </span><span class="s2">{ </span><span class="s0">get</span><span class="s2">; </span><span class="s1">private </span><span class="s0">set</span><span class="s2">; }</span>
+
+
+
+        <span class="s1">public </span><span class="s0">Car</span><span class="s2">(</span><span class="s0">IEngine engine</span><span class="s2">, </span><span class="s1">string </span><span class="s0">model</span><span class="s2">, </span><span class="s1">string </span><span class="s0">color</span><span class="s2">, </span><span class="s1">int </span><span class="s0">fuelLevel</span><span class="s2">)</span>
+
+        <span class="s2">{</span>
+
+            <span class="s0">_engine </span><span class="s2">= </span><span class="s0">engine</span><span class="s2">;</span>
+
+            <span class="s0">Model </span><span class="s2">= </span><span class="s0">model</span><span class="s2">;</span>
+
+            <span class="s0">Color </span><span class="s2">= </span><span class="s0">color</span><span class="s2">;</span>
+
+            <span class="s0">FuelLevel </span><span class="s2">= </span><span class="s0">fuelLevel</span><span class="s2">;</span>
+
+
+
+            <span class="s0">_wheels </span><span class="s2">= </span><span class="s1">new </span><span class="s0">List</span><span class="s2">&lt;</span><span class="s0">Wheel</span><span class="s2">&gt;</span>
+
+            <span class="s2">{</span>
+
+                <span class="s1">new </span><span class="s0">Wheel</span><span class="s2">(</span><span class="s3">&quot;Front-Left&quot;</span><span class="s2">),</span>
+
+                <span class="s1">new </span><span class="s0">Wheel</span><span class="s2">(</span><span class="s3">&quot;Front-Right&quot;</span><span class="s2">),</span>
+
+                <span class="s1">new </span><span class="s0">Wheel</span><span class="s2">(</span><span class="s3">&quot;Rear-Left&quot;</span><span class="s2">),</span>
+
+                <span class="s1">new </span><span class="s0">Wheel</span><span class="s2">(</span><span class="s3">&quot;Rear-Right&quot;</span><span class="s2">)</span>
+
+            <span class="s2">};</span>
+
+        <span class="s2">}</span>
+
+
+
+        <span class="s1">public void </span><span class="s0">Start</span><span class="s2">()</span>
+
+        <span class="s2">{</span>
+
+            <span class="s1">if </span><span class="s2">(</span><span class="s0">FuelLevel </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">)</span>
+
+            <span class="s2">{</span>
+
+                <span class="s0">_engine</span><span class="s2">.</span><span class="s0">Start</span><span class="s2">();</span>
+
+                <span class="s0">Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;</span><span class="s2">{</span><span class="s0">Color</span><span class="s2">} {</span><span class="s0">Model</span><span class="s2">} </span><span class="s3">is now running.&quot;</span><span class="s2">);</span>
+
+            <span class="s2">}</span>
+
+            <span class="s1">else</span>
+
+            <span class="s2">{</span>
+
+                <span class="s0">Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Cannot start the car. Fuel level is too low!&quot;</span><span class="s2">);</span>
+
+            <span class="s2">}</span>
+
+        <span class="s2">}</span>
+
+
+
+        <span class="s1">public void </span><span class="s0">Drive</span><span class="s2">()</span>
+
+        <span class="s2">{</span>
+
+            <span class="s1">if </span><span class="s2">(</span><span class="s0">FuelLevel </span><span class="s2">&gt; </span><span class="s4">0</span><span class="s2">)</span>
+
+            <span class="s2">{</span>
+
+                <span class="s0">Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;</span><span class="s2">{</span><span class="s0">Color</span><span class="s2">} {</span><span class="s0">Model</span><span class="s2">} </span><span class="s3">is driving...&quot;</span><span class="s2">);</span>
+
+                <span class="s1">foreach </span><span class="s2">(</span><span class="s0">var wheel </span><span class="s1">in </span><span class="s0">_wheels</span><span class="s2">)</span>
+
+                <span class="s2">{</span>
+
+                    <span class="s0">wheel</span><span class="s2">.</span><span class="s0">Spin</span><span class="s2">();</span>
+
+                <span class="s2">}</span>
+
+                <span class="s0">_engine</span><span class="s2">.</span><span class="s0">Accelerate</span><span class="s2">();</span>
+
+                <span class="s0">FuelLevel </span><span class="s2">-= </span><span class="s4">10</span><span class="s2">;</span>
+
+                <span class="s0">Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;Remaining fuel: </span><span class="s2">{</span><span class="s0">FuelLevel</span><span class="s2">}</span><span class="s3">%.&quot;</span><span class="s2">);</span>
+
+            <span class="s2">}</span>
+
+            <span class="s1">else</span>
+
+            <span class="s2">{</span>
+
+                <span class="s0">Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">&quot;Out of fuel. Refuel to drive.&quot;</span><span class="s2">);</span>
+
+            <span class="s2">}</span>
+
+        <span class="s2">}</span>
+
+
+
+        <span class="s1">public void </span><span class="s0">Stop</span><span class="s2">()</span>
+
+        <span class="s2">{</span>
+
+            <span class="s0">_engine</span><span class="s2">.</span><span class="s0">Stop</span><span class="s2">();</span>
+
+            <span class="s0">Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;</span><span class="s2">{</span><span class="s0">Color</span><span class="s2">} {</span><span class="s0">Model</span><span class="s2">} </span><span class="s3">has stopped.&quot;</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+
+
+
+        <span class="s1">public void </span><span class="s0">Refuel</span><span class="s2">(</span><span class="s1">int </span><span class="s0">amount</span><span class="s2">)</span>
+
+        <span class="s2">{</span>
+
+            <span class="s0">FuelLevel </span><span class="s2">+= </span><span class="s0">amount</span><span class="s2">;</span>
+
+            <span class="s1">if </span><span class="s2">(</span><span class="s0">FuelLevel </span><span class="s2">&gt; </span><span class="s4">100</span><span class="s2">) </span><span class="s0">FuelLevel </span><span class="s2">= </span><span class="s4">100</span><span class="s2">;</span>
+
+            <span class="s0">Console</span><span class="s2">.</span><span class="s0">WriteLine</span><span class="s2">(</span><span class="s3">$&quot;</span><span class="s2">{</span><span class="s0">Color</span><span class="s2">} {</span><span class="s0">Model</span><span class="s2">} </span><span class="s3">refueled. Current fuel: </span><span class="s2">{</span><span class="s0">FuelLevel</span><span class="s2">}</span><span class="s3">%.&quot;</span><span class="s2">);</span>
+
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+
+
+    <span class="s1">class </span><span class="s0">Program</span>
+
+    <span class="s2">{</span>
+
+        <span class="s1">static void </span><span class="s0">Main</span><span class="s2">(</span><span class="s1">string</span><span class="s2">[] </span><span class="s0">args</span><span class="s2">)</span>
+
+        <span class="s2">{</span>
+
+            <span class="s0">Car myCar </span><span class="s2">= </span><span class="s1">new </span><span class="s0">Car</span><span class="s2">(</span><span class="s1">new </span><span class="s0">PetrolEngine</span><span class="s2">(), </span><span class="s3">&quot;Sedan&quot;</span><span class="s2">, </span><span class="s3">&quot;Red&quot;</span><span class="s2">, </span><span class="s4">50</span><span class="s2">);</span>
+
+
+
+            <span class="s0">myCar</span><span class="s2">.</span><span class="s0">Start</span><span class="s2">();</span>
+
+            <span class="s0">myCar</span><span class="s2">.</span><span class="s0">Drive</span><span class="s2">();</span>
+
+            <span class="s0">myCar</span><span class="s2">.</span><span class="s0">Stop</span><span class="s2">();</span>
+
+            <span class="s0">myCar</span><span class="s2">.</span><span class="s0">Refuel</span><span class="s2">(</span><span class="s4">30</span><span class="s2">);</span>
+
+            <span class="s0">myCar</span><span class="s2">.</span><span class="s0">Drive</span><span class="s2">();</span>
+
+        <span class="s2">}</span>
+
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+
+</pre>
+</body>
+</html>
